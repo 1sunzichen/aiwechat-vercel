@@ -1,10 +1,11 @@
 package chat
 
 import (
-	"github.com/pwh-pwh/aiwechat-vercel/db"
-	"github.com/sashabaranov/go-openai"
 	"os"
 	"time"
+
+	"github.com/pwh-pwh/aiwechat-vercel/db"
+	"github.com/sashabaranov/go-openai"
 
 	"github.com/pwh-pwh/aiwechat-vercel/config"
 	"github.com/silenceper/wechat/v2/officialaccount/message"
@@ -33,7 +34,8 @@ func (s SimpleChat) HandleMediaMsg(msg *message.MixMessage) string {
 			}
 			return subText
 		} else {
-			return msg.Event
+			a := msg.MsgType
+			return string(a)
 		}
 	default:
 		return "未支持的类型"
