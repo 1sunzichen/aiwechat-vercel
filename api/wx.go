@@ -33,6 +33,7 @@ func Wx(rw http.ResponseWriter, req *http.Request) {
 		//回复消息：演示回复用户发送的消息
 		msgType := msg.MsgType
 		replyMsg := ""
+		fmt.Println(msgType,"msgType000")
 		if msgType == message.MsgTypeText {
 			replyMsg = bot.Chat(string(msg.FromUserName), msg.Content)
 		} else {
