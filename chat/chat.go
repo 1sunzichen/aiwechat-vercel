@@ -68,11 +68,11 @@ type ErrorChat struct {
 }
 
 func (e *ErrorChat) HandleMediaMsg(msg *message.MixMessage) string {
-	return e.errMsg
+	return "20秒后重新尝试" + e.errMsg
 }
 
 func (e *ErrorChat) Chat(userID string, msg string) string {
-	return e.errMsg
+	return "20秒后重新尝试" + e.errMsg
 }
 
 func GetChatBot(botType string) BaseChat {
