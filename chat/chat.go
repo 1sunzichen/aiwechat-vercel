@@ -33,7 +33,7 @@ func (s SimpleChat) HandleMediaMsg(msg *message.MixMessage) string {
 			}
 			return subText
 		} else {
-			return "不支持的类型"
+			return msg.Event
 		}
 	default:
 		return "未支持的类型"
