@@ -48,7 +48,8 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			returncontent += "\n 敬请期待"
 		case "tzw":
 		case "tzm":
-			returncontent += "需要下载：谷歌浏览器和插件，插件链接：链接: https://pan.baidu.com/s/1zNa5gnm9TbYH4WEf_OTNRw?pwd=y2g4 提取码: y2g4\n" +
+			returncontent += "需要下载：谷歌浏览器和插件，插件下载后 需要解压\n" +
+				"插件链接：链接: https://pan.baidu.com/s/1zNa5gnm9TbYH4WEf_OTNRw?pwd=y2g4 提取码: y2g4\n" +
 				"打开谷歌浏览器 设置-扩展程序-打开开发者模式-加载已解压的扩展程序-选择下载的插件文件夹-确定\n" +
 				"插件安装好,获取新脚本,在新脚本网站中搜索页搜索脚本\n" +
 				"输入：某某视频脚本，b站，爱奇艺d等等\n" +
