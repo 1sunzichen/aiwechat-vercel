@@ -3,10 +3,11 @@ package chat
 import (
 	"context"
 
+	"os"
+
 	"github.com/pwh-pwh/aiwechat-vercel/config"
 	"github.com/pwh-pwh/aiwechat-vercel/db"
 	"github.com/sashabaranov/go-openai"
-	"os"
 )
 
 type SimpleGptChat struct {
@@ -38,6 +39,9 @@ func (s *SimpleGptChat) getModel() string {
 }
 
 func (s *SimpleGptChat) chat(userID, msg string) string {
+	if msg == "tzw" || msg == "tza" || msg == "tza" || msg == "tzm" {
+		return msg
+	}
 	cfg := openai.DefaultConfig(s.token)
 	cfg.BaseURL = s.url
 	client := openai.NewClientWithConfig(cfg)
