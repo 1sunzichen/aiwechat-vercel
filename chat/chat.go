@@ -1,6 +1,7 @@
 package chat
 
 import (
+	"fmt"
 	"os"
 	"time"
 
@@ -23,6 +24,7 @@ func (s SimpleChat) Chat(userID string, msg string) string {
 }
 
 func (s SimpleChat) HandleMediaMsg(msg *message.MixMessage) string {
+	fmt.Println(msg.Content, "msgContent")
 	switch msg.MsgType {
 	case message.MsgTypeImage:
 		return msg.PicURL
