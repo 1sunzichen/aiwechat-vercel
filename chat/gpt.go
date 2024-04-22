@@ -40,7 +40,22 @@ func (s *SimpleGptChat) getModel() string {
 
 func (s *SimpleGptChat) chat(userID, msg string) string {
 	if msg == "tzw" || msg == "tza" || msg == "tza" || msg == "tzm" {
-		return msg
+		returncontent := "您当前输入的是 " + msg + ";tzw 是 window电脑,tzm 是苹果电脑 ,tza 是ipad 和苹果手机 ,tzs是安卓手机，请确认。 \n " +
+			msg + "需要下载"
+		switch msg {
+		case "tza":
+		case "tzs":
+			returncontent += "\n 敬请期待"
+		case "tzw":
+		case "tzm":
+			returncontent += "需要下载：谷歌浏览器和插件，插件链接：链接: https://pan.baidu.com/s/1zNa5gnm9TbYH4WEf_OTNRw?pwd=y2g4 提取码: y2g4\n" +
+				"打开谷歌浏览器 设置-扩展程序-打开开发者模式-加载已解压的扩展程序-选择下载的插件文件夹-确定\n" +
+				"插件安装好,获取新脚本,在新脚本网站中搜索页搜索脚本\n" +
+				"输入：某某视频脚本，b站，爱奇艺d等等\n" +
+				"最后去网页 爱奇艺网站等需要看的 影片资源刷新。\n" +
+				"如需帮助，请输入“会员帮助”\n"
+		}
+		return returncontent
 	}
 	cfg := openai.DefaultConfig(s.token)
 	cfg.BaseURL = s.url
@@ -58,7 +73,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 	content := resp.Choices[0].Message.Content
 	msgs = append(msgs, openai.ChatCompletionMessage{Role: openai.ChatMessageRoleAssistant, Content: content})
 	SaveMsgListWithDb(config.Bot_Type_Gpt, userID, msgs, s.toDbMsg)
-	return content
+	return content + "\n需要看电视，电影视频会员，输入tzw"
 }
 
 func (s *SimpleGptChat) Chat(userID string, msg string) string {
