@@ -30,12 +30,13 @@ func (s SimpleChat) HandleMediaMsg(msg *message.MixMessage) string {
 		if msg.Event == message.EventSubscribe {
 			subText := os.Getenv("subscribe")
 			if subText == "" {
-				subText = "哇，又有帅哥美女关注我啦😄,需要各大网站视频会员。电脑最好，手机体验不太好。 请输入 tz 关键字"
+				subText = "哇，又有帅哥美女关注我啦😄,需要各大网站视频会员。电脑最好，手机体验不太好。" +
+					" window 电脑 请输入 tzw 关键字，苹果电脑 输入 tzm,如果是 安卓手机使用请输入 tzs，苹果手机和ipad 输入tza"
 			}
 			return subText
-		} else if msg.Content == "tizi" || msg.Content == "Tizi" || msg.Content == "tz" {
+		} else if msg.Content == "tzw" || msg.Content == "tzm" || msg.Content == "tza" || msg.Content == "tzs" {
 
-			return "TZ"
+			return msg.Content
 		} else {
 			a := msg.MsgType
 			return string(a)
