@@ -52,7 +52,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 				"最后去网页 爱奇艺网站等需要看的 影片资源刷新。\n" +
 				"如需帮助，请输入“会员帮助”\n"
 		} else if msg == "tza" {
-			returncontent += "\n,敬请期待"
+			returncontent += "链接: https://pan.baidu.com/s/1-G83nFLDw7k_89KFaFLghw?pwd=3b1i 提取码: 3b1i"
 		} else if msg == "tzs" {
 			returncontent += "\n,敬请期待"
 		}
