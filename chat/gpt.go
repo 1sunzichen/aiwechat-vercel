@@ -54,7 +54,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 		} else if msg == "tza" {
 			returncontent += "链接: https://pan.baidu.com/s/1-G83nFLDw7k_89KFaFLghw?pwd=3b1i 提取码: 3b1i"
 		} else if msg == "tzs" {
-			returncontent += "\n,敬请期待"
+			returncontent += "<h1>Hello Aiwechat-Vercel!</h1>"
 		}
 
 		return returncontent
