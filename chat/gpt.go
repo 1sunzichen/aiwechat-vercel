@@ -39,7 +39,7 @@ func (s *SimpleGptChat) getModel() string {
 }
 
 func (s *SimpleGptChat) chat(userID, msg string) string {
-	if msg == "tzw" || msg == "tza" || msg == "tza" || msg == "tzm" {
+	if msg == "tzw" || msg == "tzs" || msg == "tza" || msg == "tzm" {
 		returncontent := "您当前输入的是 " + msg + ";tzw 是 window电脑,tzm 是苹果电脑 ,tza 是ipad 和苹果手机 ,tzs是安卓手机，请确认。 \n " +
 			msg
 		if msg == "tzw" || msg == "tzm" {
