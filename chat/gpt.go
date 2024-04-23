@@ -60,6 +60,8 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 		return returncontent
 	} else if msg == "会员帮助" {
 		return "链接: https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn 提取码: skfn 复制这段内容后打开百度网盘手机App，操作更方便哦"
+	} else if msg == "孙子宸" {
+		return "链接: https://pan.baidu.com/s/1NNLlZ7XDJhvC27858lTltQ?pwd=ymyb 提取码: ymyb"
 	}
 	cfg := openai.DefaultConfig(s.token)
 	cfg.BaseURL = s.url
