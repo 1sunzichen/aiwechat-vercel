@@ -75,15 +75,6 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
 				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
 				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
-				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n" +
 				"https://mj.mailseason.com/vip?url=https://www.iqiyi.com/v_cdfes9yu5s.html\n"
 
 		}
