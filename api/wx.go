@@ -51,4 +51,5 @@ func Wx(rw http.ResponseWriter, req *http.Request) {
 	}
 	//发送回复的消息
 	server.Send()
+	server.Send()
 }
