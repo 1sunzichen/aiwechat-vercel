@@ -55,5 +55,5 @@ func Wx(rw http.ResponseWriter, req *http.Request) {
 	go func() {
 		server.Send()
 	}()
-	time.Sleep(time.Second * 3)
+	time.Sleep(time.Second * 10)
 }
