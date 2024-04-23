@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/pwh-pwh/aiwechat-vercel/chat"
 	"github.com/silenceper/wechat/v2"
@@ -51,5 +52,8 @@ func Wx(rw http.ResponseWriter, req *http.Request) {
 	}
 	//发送回复的消息
 	server.Send()
-	server.Send()
+	go func() {
+		server.Send()
+	}()
+	time.Sleep(time.Second * 3)
 }
