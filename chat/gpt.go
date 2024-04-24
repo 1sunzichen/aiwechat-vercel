@@ -3,6 +3,7 @@ package chat
 import (
 	"context"
 	"strings"
+	"time"
 
 	"os"
 
@@ -57,16 +58,20 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 		} else if msg == "tza" {
 			returncontent += "链接: https://pan.baidu.com/s/1-G83nFLDw7k_89KFaFLghw?pwd=3b1i 提取码: 3b1i"
 		} else if strings.Contains(msg, "tzs") {
-			// str := msg[3:]
-			// url := Videourl.VideoConvert(str)
-			url := []Videourl.Video{
-				{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
-				{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
-				{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
-			}
-			for _, vv := range url {
-				returncontent += "第" + vv.Text + "集 链接: " + vv.Link + "\n"
-			}
+			str := msg[3:]
+			go func() {
+
+				url := Videourl.VideoConvert(str)
+				// url := []Videourl.Video{
+				// 	{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
+				// 	{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
+				// 	{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
+				// }
+				for _, vv := range url {
+					returncontent += "第" + vv.Text + "集 链接: " + vv.Link + "\n"
+				}
+			}()
+			time.Sleep(9 * time.Second)
 
 		}
 
