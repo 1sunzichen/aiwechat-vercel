@@ -31,10 +31,7 @@ func VideoConvert(videoname string) []Video {
 		// Visit link found on page
 		// Only those links are visited which are in AllowedDomains
 		match, _ := regexp.MatchString(Url, e.Text)
-		fmt.Println("link", match)
 		if match && (strings.Contains(link, "www.iqiyi.com")) {
-
-			fmt.Printf("Link found: %q -> %s\n", e.Text, link)
 
 			if Url == `^(100|[1-9][0-9]?|)$` {
 
@@ -58,13 +55,13 @@ func VideoConvert(videoname string) []Video {
 	for _, v := range newdata {
 		fmt.Println(v)
 	}
-	return newdata
+	return newdata[:10]
 }
-func main2() {
+func main() {
 	msg := "tzs哈尔滨一九四四"
 	if strings.Contains(msg, "tzs") {
 		str := msg[3:]
-		fmt.Println(str, "str")
+
 		VideoConvert(str)
 	}
 }
