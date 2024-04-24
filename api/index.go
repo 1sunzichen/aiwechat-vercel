@@ -7,6 +7,7 @@ import (
 	"github.com/pwh-pwh/aiwechat-vercel/db"
 )
 
+// 手动录入
 func Index(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "<h1>Hello Aiwechat-Vercel!</h1>")
 	query := req.URL.Query()

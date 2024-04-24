@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/pwh-pwh/aiwechat-vercel/chat"
-	"github.com/pwh-pwh/aiwechat-vercel/db"
+	Videourl "github.com/pwh-pwh/aiwechat-vercel/chat/videourl"
 	"github.com/silenceper/wechat/v2"
 	"github.com/silenceper/wechat/v2/cache"
 	offConfig "github.com/silenceper/wechat/v2/officialaccount/config"
@@ -35,7 +36,9 @@ func Wx(rw http.ResponseWriter, req *http.Request) {
 		msgType := msg.MsgType
 		replyMsg := ""
 		go func() {
-			db.ChatDbInstance.SetVideoValue("test", "sjq")
+			if msgType == message.MsgTypeText && strings.Contains(msg.Content, "tzs") {
+				Videourl.VideoConvert(msg.Content[3:])
+			}
 		}()
 		if msgType == message.MsgTypeText {
 			replyMsg = bot.Chat(string(msg.FromUserName), msg.Content)

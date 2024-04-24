@@ -59,9 +59,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 		} else if strings.Contains(msg, "tzs") {
 			str := msg[3:]
 			url, err := db.ChatDbInstance.GetVideoValue(str)
-
 			if url == "" || err != nil {
-				db.ChatDbInstance.SetVideoValue(str, "")
 				returncontent += "(暂时只支持aiqiyi平台资源)资源正在更新，后台已记录 请尝试输入如：tzs哈尔滨一九四四\n"
 			} else {
 				returncontent += url
