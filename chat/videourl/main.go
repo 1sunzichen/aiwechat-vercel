@@ -55,7 +55,7 @@ func VideoConvert(videoname string) []Video {
 	for _, v := range newdata {
 		fmt.Println(v)
 	}
-	return newdata[:10]
+	return newdata[:3]
 }
 func main() {
 	msg := "tzs哈尔滨一九四四"
