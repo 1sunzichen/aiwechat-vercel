@@ -9,6 +9,9 @@ import (
 
 func Index(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "<h1>Hello Aiwechat-Vercel!</h1>")
-	Videourl.VideoConvert("哈尔滨一九四四")
+	go func() {
+
+		Videourl.VideoConvert("哈尔滨一九四四")
+	}()
 
 }
