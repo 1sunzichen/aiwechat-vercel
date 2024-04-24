@@ -3,7 +3,6 @@ package chat
 import (
 	"context"
 	"strings"
-	"time"
 
 	"os"
 
@@ -63,7 +62,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			for _, vv := range url {
 				returncontent += "第" + vv.Text + "集 链接: " + vv.Link + "\n"
 			}
-			time.Sleep(time.Second * 10)
+
 		}
 
 		return returncontent
