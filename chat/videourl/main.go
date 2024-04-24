@@ -30,6 +30,7 @@ func VideoConvert(videoname string) {
 		if match && (strings.Contains(link, "www.iqiyi.com")) {
 
 			data = "https://mj.mailseason.com/vip?url=http:" + link
+			db.ChatDbInstance.SetVideoValue(videoname, data)
 			Url = `^(100|[1-9][0-9]?|)$`
 			c.Visit(e.Request.AbsoluteURL(link))
 		}
@@ -38,5 +39,4 @@ func VideoConvert(videoname string) {
 
 	c.Visit("https://so.iqiyi.com/so/q_" + videoname)
 
-	db.ChatDbInstance.SetVideoValue(videoname, data)
 }
