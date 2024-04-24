@@ -4,14 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
-	Videourl "github.com/pwh-pwh/aiwechat-vercel/chat/videourl"
+	"github.com/pwh-pwh/aiwechat-vercel/db"
 )
 
 func Index(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "<h1>Hello Aiwechat-Vercel!</h1>")
-	go func() {
-
-		Videourl.VideoConvert("哈尔滨一九四四")
-	}()
-
+	query := req.URL.Query()
+	param := query.Get("name")
+	url := query.Get("url")
+	db.ChatDbInstance.SetVideoValue(param, url)
 }
