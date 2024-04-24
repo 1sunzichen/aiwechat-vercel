@@ -62,7 +62,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			if url == "" || err != nil {
 				returncontent += "(暂时只支持aiqiyi平台资源)资源正在更新，后台已记录 请尝试输入如：tzs哈尔滨一九四四\n"
 			} else {
-				returncontent += url
+				returncontent += "浏览器打开链接，下方第三个按钮 可以选集" + url
 			}
 		}
 
