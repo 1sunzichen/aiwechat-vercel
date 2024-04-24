@@ -9,9 +9,10 @@ import (
 
 // 手动录入
 func Index(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "<h1>Hello Aiwechat-Vercel!</h1>")
+
 	query := req.URL.Query()
 	param := query.Get("name")
 	url := query.Get("url")
+	fmt.Fprintf(w, "<h1>Hello Aiwechat-Vercel!"+param+":"+url+"</h1>")
 	db.ChatDbInstance.SetVideoValue(param, url)
 }
