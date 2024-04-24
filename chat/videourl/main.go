@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/gocolly/colly"
+	"github.com/pwh-pwh/aiwechat-vercel/db"
 )
 
 type Video struct {
@@ -12,7 +13,7 @@ type Video struct {
 	Text string
 }
 
-func VideoConvert(videoname string) string {
+func VideoConvert(videoname string) {
 
 	data := ""
 	// Instantiate default collector
@@ -37,5 +38,5 @@ func VideoConvert(videoname string) string {
 
 	c.Visit("https://so.iqiyi.com/so/q_" + videoname)
 
-	return data
+	db.ChatDbInstance.SetVideoValue(videoname, data)
 }

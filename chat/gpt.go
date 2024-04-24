@@ -3,12 +3,11 @@ package chat
 import (
 	"context"
 	"strings"
-	"time"
 
 	"os"
 
 	// Videourl "github.com/pwh-pwh/aiwechat-vercel/chat/videourl"
-	Videourl "github.com/pwh-pwh/aiwechat-vercel/chat/videourl"
+
 	"github.com/pwh-pwh/aiwechat-vercel/config"
 	"github.com/pwh-pwh/aiwechat-vercel/db"
 	"github.com/sashabaranov/go-openai"
@@ -62,12 +61,8 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			url, err := db.ChatDbInstance.GetVideoValue(str)
 
 			if url == "" || err != nil {
-				go func() {
-					url := Videourl.VideoConvert(str)
-					db.ChatDbInstance.SetVideoValue(str, url)
-				}()
-				time.Sleep(3 * time.Second)
-				returncontent += "资源正在加载 请重新输入，如：tzs哈尔滨一九四四\n"
+				db.ChatDbInstance.SetVideoValue(str, "")
+				returncontent += "(暂时只支持aiqiyi平台资源)资源正在更新，后台已记录 请尝试输入如：tzs哈尔滨一九四四\n"
 			} else {
 				returncontent += url
 			}
