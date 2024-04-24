@@ -62,14 +62,9 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			go func() {
 
 				url := Videourl.VideoConvert(str)
-				// url := []Videourl.Video{
-				// 	{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
-				// 	{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
-				// 	{Link: "https://pan.baidu.com/s/19Q4q8Gh_2LqyJCGS1TG3GQ?pwd=skfn", Text: "skfn"},
-				// }
-				for _, vv := range url {
-					returncontent += "第" + vv.Text + "集 链接: " + vv.Link + "\n"
-				}
+
+				returncontent += url
+
 			}()
 			time.Sleep(9 * time.Second)
 
