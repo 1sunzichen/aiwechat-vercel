@@ -3,6 +3,7 @@ package chat
 import (
 	"context"
 	"strings"
+	"time"
 
 	"os"
 
@@ -58,11 +59,18 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			returncontent += "链接: https://pan.baidu.com/s/1-G83nFLDw7k_89KFaFLghw?pwd=3b1i 提取码: 3b1i"
 		} else if strings.Contains(msg, "tzs") {
 			str := msg[3:]
+			url, err := db.ChatDbInstance.GetVideoValue(str)
 
-			url := Videourl.VideoConvert(str)
-
-			returncontent += url
-
+			if url == "" || err != nil {
+				go func() {
+					url := Videourl.VideoConvert(str)
+					db.ChatDbInstance.SetVideoValue(str, url)
+				}()
+				time.Sleep(3 * time.Second)
+				returncontent += "资源正在加载 请重新输入，如：tzs哈尔滨一九四四\n"
+			} else {
+				returncontent += url
+			}
 		}
 
 		return returncontent

@@ -31,6 +31,8 @@ type Msg struct {
 type ChatDb interface {
 	GetMsgList(botType string, userId string) ([]Msg, error)
 	SetMsgList(botType string, userId string, msgList []Msg)
+	SetVideoValue(videoname string, url string)
+	GetVideoValue(videoname string) (string, error)
 }
 
 type RedisChatDb struct {
@@ -63,6 +65,18 @@ func (r *RedisChatDb) GetMsgList(botType string, userId string) ([]Msg, error) {
 	return msgList, nil
 }
 
+func (r *RedisChatDb) SetVideoValue(videoname string, url string) {
+	r.client.Set(context.Background(), videoname, url, time.Minute*30)
+
+}
+func (r *RedisChatDb) GetVideoValue(videoname string) (string, error) {
+	result, err := r.client.Get(context.Background(), videoname).Result()
+	if err != nil {
+		return "", err
+	}
+	return result, nil
+
+}
 func (r *RedisChatDb) SetMsgList(botType string, userId string, msgList []Msg) {
 	res, err := sonic.Marshal(msgList)
 	if err != nil {
