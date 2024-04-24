@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/pwh-pwh/aiwechat-vercel/chat"
+	"github.com/pwh-pwh/aiwechat-vercel/db"
 	"github.com/silenceper/wechat/v2"
 	"github.com/silenceper/wechat/v2/cache"
 	offConfig "github.com/silenceper/wechat/v2/officialaccount/config"
@@ -33,7 +34,9 @@ func Wx(rw http.ResponseWriter, req *http.Request) {
 		//回复消息：演示回复用户发送的消息
 		msgType := msg.MsgType
 		replyMsg := ""
-
+		go func() {
+			db.ChatDbInstance.SetVideoValue("test", "sjq")
+		}()
 		if msgType == message.MsgTypeText {
 			replyMsg = bot.Chat(string(msg.FromUserName), msg.Content)
 		} else {
