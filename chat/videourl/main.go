@@ -1,4 +1,4 @@
-package main
+package Videourl
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ type Video struct {
 	Text string
 }
 
-func VideoConvert() []Video {
+func VideoConvert(videoname string) []Video {
 
 	data := []Video{}
 	// Instantiate default collector
@@ -22,7 +22,7 @@ func VideoConvert() []Video {
 		// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
 		colly.AllowedDomains("so.iqiyi.com", "www.iqiyi.com", "iqiyi.com", "v.qq.com"),
 	)
-	Url := "春色寄情人"
+	Url := videoname
 	// On every a element which has href attribute call callback
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
 		link := e.Attr("href")
@@ -34,7 +34,7 @@ func VideoConvert() []Video {
 		fmt.Println("link", match)
 		if match && (strings.Contains(link, "www.iqiyi.com")) {
 
-			fmt.Printf("Link found城中之城: %q -> %s\n", e.Text, link)
+			fmt.Printf("Link found: %q -> %s\n", e.Text, link)
 
 			if Url == `^(100|[1-9][0-9]?|)$` {
 
@@ -47,12 +47,12 @@ func VideoConvert() []Video {
 
 	})
 
-	c.Visit("https://so.iqiyi.com/so/q_" + "春色寄情人")
+	c.Visit("https://so.iqiyi.com/so/q_" + videoname)
 	newdata := []Video{}
 	for i, v := range data {
 		it, _ := strconv.Atoi(v.Text)
 		if i <= it {
-			newdata = append(newdata, v)
+			newdata = append(newdata, Video{Link: "https://mj.mailseason.com/vip?url=http:" + v.Link, Text: v.Text})
 		}
 	}
 	for _, v := range newdata {
@@ -60,6 +60,11 @@ func VideoConvert() []Video {
 	}
 	return newdata
 }
-func main() {
-	VideoConvert()
+func main2() {
+	msg := "tzs哈尔滨一九四四"
+	if strings.Contains(msg, "tzs") {
+		str := msg[3:]
+		fmt.Println(str, "str")
+		VideoConvert(str)
+	}
 }
