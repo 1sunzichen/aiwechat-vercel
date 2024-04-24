@@ -43,8 +43,8 @@ func (s *SimpleGptChat) getModel() string {
 }
 
 func (s *SimpleGptChat) chat(userID, msg string) string {
-	if msg == "tzw" || msg == "tzs" || msg == "tza" || msg == "tzm" {
-		returncontent := "您当前输入的是 " + msg + ";tzw 是 window电脑,tzm 是苹果电脑 ,tza 是ipad 和苹果手机 ,tzs是安卓手机，请确认。 \n " +
+	if msg == "tzw" || strings.Contains(msg, "tzs") || msg == "tza" || msg == "tzm" {
+		returncontent := "您当前输入的是 " + msg + ";tzw 是 window电脑,tzm 是苹果电脑 ,tza 是ipad 和苹果手机 ,tzs是，请确认。 \n " +
 			msg
 		if msg == "tzw" || msg == "tzm" {
 
@@ -88,7 +88,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 	content := resp.Choices[0].Message.Content
 	msgs = append(msgs, openai.ChatCompletionMessage{Role: openai.ChatMessageRoleAssistant, Content: content})
 	SaveMsgListWithDb(config.Bot_Type_Gpt, userID, msgs, s.toDbMsg)
-	return content + "\n需要看电视，电影视频会员，输入tzw"
+	return content + "\n需要看电视，电影视频会员，输入tzs 加上 电视剧或资源名字，如：tzs哈尔滨一九四四\n，无法播放请在手机浏览器打开链接。暂时只支持ai奇艺资源其他平台还在开发中，tzs 有问题可以 输入tzw,tzm,tza 查看帮助\n"
 }
 
 func (s *SimpleGptChat) Chat(userID string, msg string) string {
