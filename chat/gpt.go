@@ -2,11 +2,10 @@ package chat
 
 import (
 	"context"
-	"time"
 
 	"os"
 
-	Videourl "github.com/pwh-pwh/aiwechat-vercel/chat/videourl"
+	// Videourl "github.com/pwh-pwh/aiwechat-vercel/chat/videourl"
 	"github.com/pwh-pwh/aiwechat-vercel/config"
 	"github.com/pwh-pwh/aiwechat-vercel/db"
 	"github.com/sashabaranov/go-openai"
@@ -56,11 +55,11 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 		} else if msg == "tza" {
 			returncontent += "链接: https://pan.baidu.com/s/1-G83nFLDw7k_89KFaFLghw?pwd=3b1i 提取码: 3b1i"
 		} else if msg == "tzs" {
-			url := Videourl.VideoConvert()
-			for _, vv := range url {
-				returncontent += "链接: " + vv.Link + " 提取码: " + vv.Text + "\n"
-			}
-			time.Sleep(time.Second * 10)
+			// url := Videourl.VideoConvert()
+			// for _, vv := range url {
+			// 	returncontent += "链接: " + vv.Link + " 提取码: " + vv.Text + "\n"
+			// }
+			// time.Sleep(time.Second * 10)
 		}
 
 		return returncontent

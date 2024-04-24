@@ -1,4 +1,4 @@
-package Videourl
+package main
 
 import (
 	"fmt"
@@ -59,4 +59,7 @@ func VideoConvert() []Video {
 		fmt.Println(v)
 	}
 	return newdata
+}
+func main() {
+	VideoConvert()
 }
