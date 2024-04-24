@@ -52,16 +52,15 @@ func VideoConvert(videoname string) []Video {
 			newdata = append(newdata, Video{Link: "https://mj.mailseason.com/vip?url=http:" + v.Link, Text: v.Text})
 		}
 	}
-	for _, v := range newdata {
-		fmt.Println(v)
-	}
+
 	return newdata[:3]
 }
-func main() {
+func main2() {
 	msg := "tzs哈尔滨一九四四"
 	if strings.Contains(msg, "tzs") {
 		str := msg[3:]
 
-		VideoConvert(str)
+		data := VideoConvert(str)
+		fmt.Println(data)
 	}
 }
