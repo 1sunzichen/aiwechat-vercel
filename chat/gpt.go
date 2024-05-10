@@ -43,7 +43,7 @@ func (s *SimpleGptChat) getModel() string {
 
 func (s *SimpleGptChat) chat(userID, msg string) string {
 	if msg == "tzw" || strings.Contains(msg, "tzs") || msg == "tza" || msg == "tzm" {
-		returncontent := "您当前输入的是 " + msg + ";tzw 是 window电脑,tzm 是苹果电脑 ,tza 是ipad 和苹果手机 ,tzs是，请确认。 \n " +
+		returncontent := "您当前输入的是 " + msg + " \n " +
 			msg
 		if msg == "tzw" || msg == "tzm" {
 
@@ -60,9 +60,9 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			str := msg[3:]
 			url, err := db.ChatDbInstance.GetVideoValue(str)
 			if url == "" || err != nil {
-				returncontent += "(暂时只支持aiqiyi平台资源)资源正在更新，后台已记录 请尝试输入如：tzs哈尔滨一九四四\n"
+				returncontent += "请尝试输入如：tzs哈尔滨一九四四 （哈尔滨一九四四 可更换 资源名字，如没有直接联系vx15210187668反映）\n"
 			} else {
-				returncontent += "浏览器打开链接，下方第三个按钮 可以选集" + url
+				returncontent += "！！！浏览器打开链接！！！，下方第三个按钮 可以选集" + url
 			}
 		}
 
