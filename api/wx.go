@@ -41,6 +41,7 @@ func Wx(rw http.ResponseWriter, req *http.Request) {
 			}
 		}()
 		if msgType == message.MsgTypeText {
+			fmt.Println("msg.Content:", msg.Content)
 			replyMsg = bot.Chat(string(msg.FromUserName), msg.Content)
 		} else {
 			replyMsg = bot.HandleMediaMsg(msg)
