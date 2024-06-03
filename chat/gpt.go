@@ -1,18 +1,37 @@
 package chat
 
 import (
-	"context"
+	"bytes"
+	"encoding/json"
+	"log"
 	"strings"
 
 	"os"
 
 	// Videourl "github.com/pwh-pwh/aiwechat-vercel/chat/videourl"
+	"github.com/go-resty/resty/v2"
 
 	"github.com/pwh-pwh/aiwechat-vercel/config"
 	"github.com/pwh-pwh/aiwechat-vercel/db"
 	"github.com/sashabaranov/go-openai"
 )
 
+type Message struct {
+	Role    string `json:"role"`
+	Content string `json:"content"`
+}
+
+type RequestBody struct {
+	Model    string    `json:"model"`
+	Messages []Message `json:"messages"`
+}
+
+type ResponseChoice struct {
+	Message Message `json:"message"`
+}
+type ResponseBody struct {
+	Choices []ResponseChoice `json:"choices"`
+}
 type SimpleGptChat struct {
 	token string
 	url   string
@@ -72,20 +91,52 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 	} else if msg == "孙子宸" {
 		return "链接: https://pan.baidu.com/s/1NNLlZ7XDJhvC27858lTltQ?pwd=ymyb 提取码: ymyb"
 	}
-	cfg := openai.DefaultConfig(s.token)
-	cfg.BaseURL = s.url
-	client := openai.NewClientWithConfig(cfg)
-
+	// cfg := openai.DefaultConfig(s.token)
+	// cfg.BaseURL = s.url
+	// client := openai.NewClientWithConfig(cfg)
+	endpoint := "/chat/completions"
+	client := resty.New()
+	client.SetBaseURL(s.url)
+	client.SetAuthToken(s.token)
 	var msgs = GetMsgListWithDb(config.Bot_Type_Gpt, userID, openai.ChatCompletionMessage{Role: openai.ChatMessageRoleUser, Content: msg}, s.toDbMsg, s.toChatMsg)
-	resp, err := client.CreateChatCompletion(context.Background(),
-		openai.ChatCompletionRequest{
-			Model:    s.getModel(),
-			Messages: msgs,
-		})
-	if err != nil {
-		return err.Error()
+	messages := []Message{}
+	for k, v := range msgs {
+		messages = append(messages, Message{Role: v.Role, Content: v.Content})
+		if k > 3 {
+			break
+		}
 	}
-	content := resp.Choices[0].Message.Content
+	requestBody := RequestBody{
+		Model:    "gpt-3.5-turbo-0125",
+		Messages: messages,
+	}
+	body, err := json.Marshal(requestBody)
+	if err != nil {
+		log.Fatalf("Failed to marshal request body: %v", err)
+	}
+	resp, err := client.R().
+		SetHeader("Content-Type", "application/json").
+		SetBody(bytes.NewBuffer(body)).
+		Post(endpoint)
+
+	if err != nil {
+		log.Fatalf("Error while making request: %v", err)
+	}
+
+	var responseBody ResponseBody
+	err = json.Unmarshal(resp.Body(), &responseBody)
+	if err != nil {
+		log.Fatalf("Failed to unmarshal response body: %v", err)
+	}
+	// resp, err := client.CreateChatCompletion(context.Background(),
+	// 	openai.ChatCompletionRequest{
+	// 		Model:    s.getModel(),
+	// 		Messages: msgs,
+	// 	})
+	// if err != nil {
+	// 	return err.Error()
+	// }
+	content := responseBody.Choices[0].Message.Content
 	msgs = append(msgs, openai.ChatCompletionMessage{Role: openai.ChatMessageRoleAssistant, Content: content})
 	SaveMsgListWithDb(config.Bot_Type_Gpt, userID, msgs, s.toDbMsg)
 	return content + "\n需要看电视，电影视频资源，输入如：tzs哈尔滨一九四四\n，\n"
