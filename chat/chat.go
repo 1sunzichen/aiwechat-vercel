@@ -96,7 +96,9 @@ func GetChatBot(botType string) BaseChat {
 	case config.Bot_Type_Gpt:
 		url := os.Getenv("GPT_URL")
 		if url == "" {
-			url = "https://api.openai.com/v1/"
+
+			// url = "https://api.openai.com/v1/"
+			url = "https://ai-yyds.com/v1/"
 		}
 		return &SimpleGptChat{
 			token:      os.Getenv("GPT_TOKEN"),
