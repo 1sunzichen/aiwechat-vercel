@@ -84,6 +84,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			Model:    s.getModel(),
 			Messages: msgs,
 		})
+	fmt.Println("content$$$$$$$before:")
 	if err != nil {
 		return err.Error()
 	}
