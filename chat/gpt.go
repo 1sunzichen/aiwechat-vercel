@@ -37,7 +37,7 @@ func (s *SimpleGptChat) toChatMsg(msg db.Msg) openai.ChatCompletionMessage {
 func (s *SimpleGptChat) getModel() string {
 	model := os.Getenv("gptModel")
 	if model == "" {
-		model = "gpt-3.5-turbo"
+		model = "gpt-4o"
 	}
 	return model
 }
