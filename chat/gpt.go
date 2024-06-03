@@ -90,9 +90,11 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 
 	content := resp.Choices[0].Message.Content
 	fmt.Println("content$$$$$$$:", content)
-	msgs = append(msgs, openai.ChatCompletionMessage{Role: openai.ChatMessageRoleAssistant, Content: content})
+	// msgs = append(msgs, openai.ChatCompletionMessage{Role: openai.ChatMessageRoleAssistant, Content: content})
+	msgs = append(msgs, openai.ChatCompletionMessage{Role: openai.ChatMessageRoleAssistant, Content: ""})
 	SaveMsgListWithDb(config.Bot_Type_Gpt, userID, msgs, s.toDbMsg)
-	return content + "\n需要看电视，电影视频资源，输入如：tzs哈尔滨一九四四\n，\n"
+	// return content + "\n需要看电视，电影视频资源，输入如：tzs哈尔滨一九四四\n，\n"
+	return "\n需要看电视，电影视频资源，输入如：tzs哈尔滨一九四四\n，\n"
 }
 
 func (s *SimpleGptChat) Chat(userID string, msg string) string {
