@@ -70,7 +70,7 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 		return "链接: https://pan.baidu.com/s/1NNLlZ7XDJhvC27858lTltQ?pwd=ymyb 提取码: ymyb"
 	}
 	cfg := openai.DefaultConfig(s.token)
-	cfg.BaseURL = "https://ai-yyds.com/v1"
+
 	client := openai.NewClientWithConfig(cfg)
 
 	var msgs = GetMsgListWithDb(config.Bot_Type_Gpt, userID, openai.ChatCompletionMessage{Role: openai.ChatMessageRoleUser, Content: msg}, s.toDbMsg, s.toChatMsg)
