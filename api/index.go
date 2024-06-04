@@ -18,7 +18,9 @@ func Index(w http.ResponseWriter, req *http.Request) {
 			case <-done:
 				return
 			case t := <-ticker.C:
-				fmt.Println("Current time: ", t)
+				s := t.Format("2006-01-02 15:04:05")
+
+				fmt.Fprintf(w, "<h1>Current time"+s+"</h1>")
 			}
 		}
 	}()
