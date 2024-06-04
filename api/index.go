@@ -23,7 +23,7 @@ func Index(w http.ResponseWriter, req *http.Request) {
 		}
 	}()
 
-	time.Sleep(10 * time.Second)
-	done <- true
+	// time.Sleep(10 * time.Second)
+	// done <- true
 	fmt.Fprintf(w, "<h1>请关注公众号，电视剧资源已更新</h1>")
 }
