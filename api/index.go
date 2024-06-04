@@ -7,6 +7,7 @@ import (
 )
 
 func Index(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "<h1>请关注公众号，电视剧资源已更新</h1>")
 	ticker := time.NewTicker(1 * time.Second)
 	defer ticker.Stop()
 
@@ -22,8 +23,8 @@ func Index(w http.ResponseWriter, req *http.Request) {
 			}
 		}
 	}()
-
+	select {}
 	// time.Sleep(10 * time.Second)
 	// done <- true
-	fmt.Fprintf(w, "<h1>请关注公众号，电视剧资源已更新</h1>")
+
 }
