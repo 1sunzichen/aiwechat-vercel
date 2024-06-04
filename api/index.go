@@ -7,10 +7,23 @@ import (
 )
 
 func Index(w http.ResponseWriter, req *http.Request) {
-	time.AfterFunc(1*time.Second, func() {
-		fmt.Fprintf(w, "Hello, world2222!")
-	})
+	ticker := time.NewTicker(1 * time.Second)
+	defer ticker.Stop()
 
-	fmt.Fprintf(w, "Hello, world!")
+	done := make(chan bool)
 
+	go func() {
+		for {
+			select {
+			case <-done:
+				return
+			case t := <-ticker.C:
+				fmt.Println("Current time: ", t)
+			}
+		}
+	}()
+
+	time.Sleep(10 * time.Second)
+	done <- true
+	fmt.Fprintf(w, "<h1>请关注公众号，电视剧资源已更新</h1>")
 }
