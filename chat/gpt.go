@@ -46,8 +46,15 @@ func (s *SimpleGptChat) getModel() string {
 
 func (s *SimpleGptChat) chat(userID, msg string) string {
 	if strings.Contains(msg, "tzs") {
-
-		return "需要看电视，电影视频资源，输入如：tzs哈尔滨一九四四\n，\n"
+		returncontent := ""
+		str := msg[3:]
+		url, err := db.ChatDbInstance.GetVideoValue(str)
+		if url == "" || err != nil {
+			returncontent += "请尝试输入如：tzs哈尔滨一九四四 （哈尔滨一九四四 可更换 资源名字，如没有直接联系vx15210187668反映）\n"
+		} else {
+			returncontent += "!!!复制到浏览器打开链接，不用使用微信打开链接!!!，下方第三个按钮 可以选集" + url
+		}
+		return returncontent
 	}
 	cfg := openai.DefaultConfig(s.token)
 
