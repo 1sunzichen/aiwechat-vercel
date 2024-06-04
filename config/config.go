@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 	"slices"
-	"sync"
 	"strconv"
+	"sync"
 
 	"github.com/pwh-pwh/aiwechat-vercel/db"
 )
@@ -85,7 +85,7 @@ func CheckGptConfig() error {
 	token := GetWxToken()
 	botType := GetBotType()
 	if token == "" {
-		return errors.New("请配置微信TOKEN")
+		return errors.New("请配置微信TOKEN1")
 	}
 	if gptToken == "" && botType == Bot_Type_Gpt {
 		return errors.New("请配置ChatGPTToken")
