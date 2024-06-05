@@ -54,6 +54,8 @@ func (s *SimpleGptChat) chat(userID, msg string) string {
 			returncontent += "!!!复制到浏览器打开链接，不用使用微信打开链接!!!，下方第三个按钮 可以选集" + url
 		}
 		return returncontent
+	} else if strings.ToUpper(msg) == "SJ" || strings.ToUpper(msg) == "圣经" {
+		return "链接: https://pan.baidu.com/s/1iroQ_a-cPXf1the2Wz2NRw?pwd=w1ag 提取码: w1ag"
 	}
 	cfg := openai.DefaultConfig(s.token)
 
